@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<script language="javascript">
+var n;
+var seed;
+var sresult;
+function combi()
+{
+    n=parseInt(document.frm.fz.value,10);
+    sresult="";
+    seed=new Array();
+    for(var a = 1;a<=9;a++)
+    {
+        if(document.frm["f" + a].value=="")break;
+        seed[a-1]=document.frm["f" + a].value;
+    }
+    if(n>seed.length)
+    {
+        alert("조합의 수가 글자 수보다 많습니다.");
+        return;
+    }
+    combi_str("",0,0)
+    document.frm.result.value=sresult;
+}
+
+function combi_str(sData, i, iStep)
+{
+    if(iStep >= n)
+    {
+        sresult += sData + "\n";
+        return;
+    }
+    for(var a = i + 1;a<=seed.length;a++)
+    {
+        combi_str(sData + " " +seed[a-1], a+0, iStep + 1);
+    }
+}
+
+</script>
+<body>
+<form name="frm">
+<input type="text" name="f1" size=1 value="1"><input type="text" name="f2" size=1 value="2">
+<input type="text" name="f3" size=1 value="3"><input type="text" name="f4" size=1 value="4">
+<input type="text" name="f5" size=1 value="5"><input type="text" name="f6" size=1 value="6">
+<input type="text" name="f7" size=1 value="7"><input type="text" name="f8" size=1 value="8">
+<input type="text" name="f9" size=1 value="9"><br>
+조합의 개수 :
+<input type="text" name="fz" size=1 value="3">
+<input type="button" onclick="combi()" value="조합">
+<textarea name="result" style="width:100%;height=300;"></textarea>
+</form>
+</body>
+</html>
